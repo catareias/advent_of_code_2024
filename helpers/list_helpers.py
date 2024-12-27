@@ -14,3 +14,26 @@ def calc_similarity_of_two_lists(list1, list2):
         similarity = len(list2_filtered) * list1_value
         total_similarity += similarity
     return total_similarity
+
+def calc_safety_of_reports(reports, acceptable_deltas):
+    safe_counter = 0
+    for report in reports:
+        start_level = int(report[0])
+        start_diff = int(report[1]) - start_level
+
+        for index, level in enumerate(report[1:]):
+            # index is one behind
+            diff = int(level) - int(report[index])
+            if diff not in acceptable_deltas or diff * start_diff <= 0:
+                # diff of 0 is not acceptable
+                # diff * start_diff <= 0 means they are not the same sign
+                # diff * start_diff < 0 means they are the same sign and diff is not 0
+                break
+            else:
+                # setup for next iteration
+                start_diff = diff
+                # if we make it to end of list without breaking, we have a safe report
+                if index == len(report) - 2:
+                    safe_counter += 1
+
+    return safe_counter
