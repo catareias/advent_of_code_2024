@@ -1,8 +1,8 @@
-from helpers.file_helpers import export_from_file
+from helpers.file_helpers import export_columns_from_file
 from helpers.list_helpers import calc_distance_of_two_lists
 
 # file into list:
-data = export_from_file("inputs/day01.txt")
+data = export_columns_from_file("inputs/day01_p1.txt")
 
 # sort 
 list1 = sorted(data[0])
